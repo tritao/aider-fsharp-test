@@ -39,7 +39,7 @@ let tokenize (input: string) =
                 | "public" | "static" | "int" | "return" | "class" -> Keyword idStr
                 | _ -> Identifier idStr
             tokenize' rest' (token :: tokens)
-        | c :: rest when "+-*/".Contains(c) ->
+        | c :: rest when "+-*/<".Contains(c) ->
             tokenize' rest (Operator (string c) :: tokens)
         | c :: rest -> tokenize' rest (Unknown c :: tokens)
 
