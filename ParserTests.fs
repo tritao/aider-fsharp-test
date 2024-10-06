@@ -39,11 +39,11 @@ let ``Test parse if statement`` () =
         OpenParen
         Identifier "val"
         Operator "<"
-        Number 50
+        Token.Number 50
         CloseParen
         OpenBrace
         Keyword "return"
-        Number 100
+        Token.Number 100
         Semicolon
         CloseBrace
     ]
