@@ -37,4 +37,4 @@ let ``Test tokenize with parentheses and braces`` () =
         CloseBrace
     ]
     let tokens = tokenize code
-    Assert.Equal(expectedTokens, tokens)
+    Assert.Equal<Token list>(expectedTokens, tokens)
