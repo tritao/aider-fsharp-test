@@ -59,8 +59,6 @@ let rec parseParameters tokens acc =
     | _ -> failwith "Unexpected token in parameters"
 
 let parse (tokens: Token list) : Function =
-
-
     match tokens with
     | Keyword "public" :: Keyword "static" :: Keyword "int" :: Identifier name :: OpenParen :: rest ->
         let parameters, rest' = parseParameters rest []
