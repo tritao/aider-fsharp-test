@@ -68,7 +68,7 @@ let rec parseParameters tokens acc =
 
 let rec parseMembers tokens acc =
     match tokens with
-    | Keyword t :: Identifier n :: Semicolon :: rest ->
+    | (Keyword t | Identifier t) :: Identifier n :: Semicolon :: rest ->
         let classMember = (t, n)
         parseMembers rest (classMember :: acc)
     | CloseBrace :: rest -> List.rev acc, rest
