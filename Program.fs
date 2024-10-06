@@ -3,6 +3,16 @@ module Program
 
 open Lexer
 
-let code = "public static int CalculatePrice(int val, int val2) { if (val < 50) return 100; return val * 500; }"
-let tokens = tokenize code
-printfn "%A" tokens
+let rec repl () =
+    printf "Enter code: "
+    let input = System.Console.ReadLine()
+    if input <> "exit" then
+        let tokens = tokenize input
+        printfn "%A" tokens
+        repl ()
+
+[<EntryPoint>]
+let main argv =
+    printfn "F# REPL - Type 'exit' to quit."
+    repl ()
+    0
