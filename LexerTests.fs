@@ -16,6 +16,21 @@ let ``Test tokenize with keywords and identifiers`` () =
     Assert.Equal<Token list>(expectedTokens, tokens)
 
 [<Fact>]
+let ``Test tokenize class declaration`` () =
+    let code = "class Options { int x; }"
+    let expectedTokens = [
+        Keyword "class"
+        Identifier "Options"
+        OpenBrace
+        Keyword "int"
+        Identifier "x"
+        Semicolon
+        CloseBrace
+    ]
+    let tokens = tokenize code
+    Assert.Equal<Token list>(expectedTokens, tokens)
+
+[<Fact>]
 let ``Test tokenize with numbers and operators`` () =
     let code = "val + 100"
     let expectedTokens = [
