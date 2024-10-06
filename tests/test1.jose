@@ -1,0 +1,4 @@
+class Options {
+    int x;
+    int y;
+}
