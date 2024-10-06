@@ -13,7 +13,7 @@ let ``Test tokenize with keywords and identifiers`` () =
         Identifier "CalculatePrice"
     ]
     let tokens = tokenize code
-    Assert.Equal(expectedTokens, tokens)
+    Assert.Equal<Token list>(expectedTokens, tokens)
 
 [<Fact>]
 let ``Test tokenize with numbers and operators`` () =
