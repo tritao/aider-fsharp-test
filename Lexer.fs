@@ -9,6 +9,7 @@ type Token =
     | CloseParen
     | OpenBrace
     | CloseBrace
+    | Comma
     | Semicolon
     | Unknown of char
 

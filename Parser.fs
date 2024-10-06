@@ -17,6 +17,11 @@ type Function =
       Parameters: (string * string) list
       Body: Statement list }
 
+let parseStatement (tokens: Token list) : Statement * Token list =
+    // Implementation of parseStatement
+    // (This should be the actual implementation from the Parser module)
+    failwith "Not implemented"
+
 let parse (tokens: Token list) : Function =
     let rec parseExpression tokens =
         match tokens with
@@ -51,8 +56,8 @@ let parse (tokens: Token list) : Function =
         | Identifier t :: Identifier n :: rest ->
             let param = (t, n)
             match rest with
-            | Comma :: rest' -> parseParameters rest' (param :: acc)
-            | CloseParen :: rest' -> List.rev (param :: acc), rest'
+            | Lexer.Comma :: rest' -> parseParameters rest' (param :: acc)
+            | Lexer.CloseParen :: rest' -> List.rev (param :: acc), rest'
             | _ -> failwith "Unexpected token in parameters"
         | _ -> failwith "Unexpected token in parameters"
 
