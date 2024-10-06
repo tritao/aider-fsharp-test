@@ -20,7 +20,7 @@ let ``Test parse function declaration`` () =
         CloseParen
         OpenBrace
         Keyword "return"
-        Number 100
+        Token.Number 100
         Semicolon
         CloseBrace
     ]
@@ -39,11 +39,11 @@ let ``Test parse if statement`` () =
         OpenParen
         Identifier "val"
         Operator "<"
-        Number 50
+        Token.Number 50
         CloseParen
         OpenBrace
         Keyword "return"
-        Number 100
+        Token.Number 100
         Semicolon
         CloseBrace
     ]
@@ -58,7 +58,7 @@ let ``Test parse if statement`` () =
 let ``Test parse return statement`` () =
     let tokens = [
         Keyword "return"
-        Number 500
+        Token.Number 500
         Semicolon
     ]
     let expectedStatement = Return (Number 500)
