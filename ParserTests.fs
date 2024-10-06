@@ -48,7 +48,7 @@ let ``Test parse if statement`` () =
         CloseBrace
     ]
     let expectedStatement = If (
-        Lexer.BinaryOperation (Lexer.Variable "val", "<", Lexer.Number 50),
+        BinaryOperation (Variable "val", "<", Number 50),
         Return (Number 100)
     )
     let parsedStatement, _ = parseStatement tokens
