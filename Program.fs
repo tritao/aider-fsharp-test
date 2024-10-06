@@ -5,6 +5,8 @@ open System.IO
 open Lexer
 open Parser
 open JsEmitter
+open Parser
+open JsEmitter
 
 [<EntryPoint>]
 let main argv =
