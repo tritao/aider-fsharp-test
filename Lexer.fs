@@ -18,7 +18,7 @@ let tokenize (input: string) =
     let rec tokenize' chars tokens =
         match chars with
         | [] -> List.rev tokens
-        | ' ' :: rest -> tokenize' rest tokens
+        | c :: rest when System.Char.IsWhiteSpace(c) -> tokenize' rest tokens
         | '(' :: rest -> tokenize' rest (OpenParen :: tokens)
         | ')' :: rest -> tokenize' rest (CloseParen :: tokens)
         | '{' :: rest -> tokenize' rest (OpenBrace :: tokens)
