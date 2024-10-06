@@ -40,7 +40,3 @@ let tokenize (input: string) =
 
     tokenize' (List.ofSeq input) []
 
-// Example usage
-let code = "public static int CalculatePrice(int val, int val2) { if (val < 50) return 100; return val * 500; }"
-let tokens = tokenize code
-printfn "%A" tokens
