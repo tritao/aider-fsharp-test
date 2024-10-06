@@ -35,7 +35,7 @@ let tokenize (input: string) =
             let idStr = System.String.Concat(identifier |> List.map string)
             let token = 
                 match idStr with
-                | "public" | "static" | "int" | "return" -> Keyword idStr
+                | "public" | "static" | "int" | "return" | "class" -> Keyword idStr
                 | _ -> Identifier idStr
             tokenize' rest' (token :: tokens)
         | c :: rest when "+-*/".Contains(c) ->
