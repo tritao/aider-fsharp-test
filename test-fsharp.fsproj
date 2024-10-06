@@ -10,5 +10,9 @@
     <Compile Include="Lexer.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <Compile Include="LexerTests.fs" />
+  </ItemGroup>
 
 </Project>
