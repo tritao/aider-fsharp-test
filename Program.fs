@@ -18,6 +18,7 @@ let main argv =
         if File.Exists(filePath) then
             let input = File.ReadAllText(filePath)
             let tokens = tokenize input
+            printfn "Tokens: %A" tokens
             let ast, _ = parse tokens
             let jsOutput = emitTopLevel ast
             printfn "%s" jsOutput
