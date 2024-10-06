@@ -21,7 +21,7 @@ let rec emitStatement (stmt: Statement) =
 let emitFunction (func: Function) =
     let parameters = func.Parameters |> List.map snd |> String.concat ", "
     let body = func.Body |> List.map emitStatement |> String.concat " "
-    sprintf "function %s(%s) %s" func.Name parameters body
+    sprintf "function %s(%s) { %s }" func.Name parameters body
 
 let emitClass (cls: Class) =
     let members = cls.Members |> List.map (fun (t, n) -> sprintf "this.%s = null;" n) |> String.concat " "
