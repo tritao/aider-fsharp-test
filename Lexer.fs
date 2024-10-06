@@ -25,6 +25,7 @@ let tokenize (input: string) =
         | '}' :: rest -> tokenize' rest (CloseBrace :: tokens)
         | ';' :: rest -> tokenize' rest (Semicolon :: tokens)
         | ',' :: rest -> tokenize' rest (Comma :: tokens)
+        | c :: rest when System.Char.IsDigit(c) ->
             let number = List.takeWhile System.Char.IsDigit chars
             let rest' = List.skipWhile System.Char.IsDigit chars
             let numStr = System.String.Concat(number |> List.map string)
