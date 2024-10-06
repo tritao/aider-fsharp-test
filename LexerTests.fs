@@ -24,7 +24,7 @@ let ``Test tokenize with numbers and operators`` () =
         Number 100
     ]
     let tokens = tokenize code
-    Assert.Equal(expectedTokens, tokens)
+    Assert.Equal<Token list>(expectedTokens, tokens)
 
 [<Fact>]
 let ``Test tokenize with parentheses and braces`` () =
