@@ -20,8 +20,8 @@ type Function =
 let parse (tokens: Token list) : Function =
     let rec parseExpression tokens =
         match tokens with
-        | Number n :: rest -> Number n, rest
-        | Identifier v :: rest -> Variable v, rest
+        | Lexer.Number n :: rest -> Number n, rest
+        | Lexer.Identifier v :: rest -> Variable v, rest
         | _ -> failwith "Unexpected token in expression"
 
     let rec parseStatement tokens =
