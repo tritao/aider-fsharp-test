@@ -20,6 +20,9 @@ type Function =
 let rec parseExpression tokens =
     match tokens with
     | Lexer.Number n :: rest -> Number n, rest
+    | Lexer.Identifier v :: Operator op :: rest ->
+        let rightExpr, rest' = parseExpression rest
+        BinaryOperation (Variable v, op, rightExpr), rest'
     | Lexer.Identifier v :: rest -> Variable v, rest
     | _ -> failwith "Unexpected token in expression"
 
