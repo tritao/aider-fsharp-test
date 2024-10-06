@@ -12,6 +12,10 @@ type Statement =
     | If of Expression * Statement
     | Block of Statement list
 
+type Class =
+    { Name: string
+      Members: (string * string) list }
+
 type Function =
     { Name: string
       Parameters: (string * string) list
@@ -58,7 +62,27 @@ let rec parseParameters tokens acc =
         | _ -> failwith "Unexpected token in parameters"
     | _ -> failwith "Unexpected token in parameters"
 
-let parse (tokens: Token list) : Function =
+let rec parseMembers tokens acc =
+    match tokens with
+    | Keyword t :: Identifier n :: Semicolon :: rest ->
+        let member = (t, n)
+        parseMembers rest (member :: acc)
+    | CloseBrace :: rest -> List.rev acc, rest
+    | _ -> failwith "Unexpected token in class members"
+
+let parse (tokens: Token list) =
+    match tokens with
+    | Keyword "class" :: Identifier name :: OpenBrace :: rest ->
+        let members, rest' = parseMembers rest []
+        { Name = name; Members = members }, rest'
+    | Keyword "public" :: Keyword "static" :: Keyword "int" :: Identifier name :: OpenParen :: rest ->
+        let parameters, rest' = parseParameters rest []
+        match rest' with
+        | OpenBrace :: rest'' ->
+            let body, _ = parseStatement rest''
+            { Name = name; Parameters = parameters; Body = [body] }
+        | _ -> failwith "Expected opening brace"
+    | _ -> failwith "Unexpected token in declaration"
     match tokens with
     | Keyword "public" :: Keyword "static" :: Keyword "int" :: Identifier name :: OpenParen :: rest ->
         let parameters, rest' = parseParameters rest []
