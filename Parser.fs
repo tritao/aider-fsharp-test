@@ -58,7 +58,7 @@ let rec parseStatement tokens =
 
 let rec parseParameters tokens acc =
     match tokens with
-    | Identifier t :: Identifier n :: rest ->
+    | Keyword t :: Identifier n :: rest ->
         let param = (t, n)
         match rest with
         | Lexer.Comma :: rest' -> parseParameters rest' (param :: acc)
