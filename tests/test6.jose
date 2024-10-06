@@ -1,0 +1,5 @@
+if (score > 90) {
+    return "A";
+} else {
+    return "B";
+}
