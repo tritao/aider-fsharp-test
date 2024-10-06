@@ -35,6 +35,29 @@ let ``Test parse function declaration`` () =
     | _ -> failwith "Expected a function declaration"
 
 [<Fact>]
+let ``Test parse class declaration`` () =
+    let tokens = [
+        Keyword "class"
+        Identifier "Options"
+        OpenBrace
+        Keyword "int"
+        Identifier "x"
+        Semicolon
+        Keyword "int"
+        Identifier "y"
+        Semicolon
+        CloseBrace
+    ]
+    let expectedClass = {
+        Name = "Options"
+        Members = [("int", "x"); ("int", "y")]
+    }
+    let parsedDeclaration, _ = parse tokens
+    match parsedDeclaration with
+    | ClassDecl parsedClass -> Assert.Equal(expectedClass, parsedClass)
+    | _ -> failwith "Expected a class declaration"
+
+[<Fact>]
 let ``Test parse if statement`` () =
     let tokens = [
         Keyword "if"
