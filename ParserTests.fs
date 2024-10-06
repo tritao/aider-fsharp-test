@@ -64,7 +64,3 @@ let ``Test parse return statement`` () =
     let expectedStatement = Return (Number 500)
     let parsedStatement, _ = parseStatement tokens
     Assert.Equal(expectedStatement, parsedStatement)
-[<EntryPoint>]
-let main argv =
-    // Entry point for the test project
-    0
