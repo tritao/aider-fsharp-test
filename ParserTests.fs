@@ -29,8 +29,10 @@ let ``Test parse function declaration`` () =
         Parameters = [("int", "val"); ("int", "val2")]
         Body = [Return (Number 100)]
     }
-    let parsedFunction = parse tokens
-    Assert.Equal(expectedFunction, parsedFunction)
+    let parsedDeclaration, _ = parse tokens
+    match parsedDeclaration with
+    | FunctionDecl parsedFunction -> Assert.Equal(expectedFunction, parsedFunction)
+    | _ -> failwith "Expected a function declaration"
 
 [<Fact>]
 let ``Test parse if statement`` () =
