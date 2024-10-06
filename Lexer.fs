@@ -12,6 +12,14 @@ type Token =
     | Semicolon
     | Unknown of char
 
+let rec span predicate lst =
+    match lst with
+    | [] -> ([], [])
+    | x::xs when predicate x ->
+        let (ys, zs) = span predicate xs
+        (x::ys, zs)
+    | _ -> ([], lst)
+
 let tokenize (input: string) =
     let rec tokenize' chars tokens =
         match chars with
@@ -23,12 +31,12 @@ let tokenize (input: string) =
         | '}' :: rest -> tokenize' rest (CloseBrace :: tokens)
         | ';' :: rest -> tokenize' rest (Semicolon :: tokens)
         | c :: rest when System.Char.IsDigit(c) ->
-            let number, rest' = chars |> List.span System.Char.IsDigit
-            let numStr = System.String.Concat(number)
+            let number, rest' = span System.Char.IsDigit chars
+            let numStr = System.String.Concat(number |> List.map string)
             tokenize' rest' (Number (int numStr) :: tokens)
         | c :: rest when System.Char.IsLetter(c) ->
-            let identifier, rest' = chars |> List.span System.Char.IsLetterOrDigit
-            let idStr = System.String.Concat(identifier)
+            let identifier, rest' = span System.Char.IsLetterOrDigit chars
+            let idStr = System.String.Concat(identifier |> List.map string)
             let token = 
                 match idStr with
                 | "public" | "static" | "int" | "return" -> Keyword idStr
