@@ -21,6 +21,10 @@ type Function =
       Parameters: (string * string) list
       Body: Statement list }
 
+type Declaration =
+    | ClassDecl of Class
+    | FunctionDecl of Function
+
 let rec parseExpression tokens =
     match tokens with
     | Lexer.Number n :: rest -> Number n, rest
@@ -74,13 +78,13 @@ let parse (tokens: Token list) =
     match tokens with
     | Keyword "class" :: Identifier name :: OpenBrace :: rest ->
         let members, rest' = parseMembers rest []
-        { Name = name; Members = members }, rest'
+        ClassDecl { Name = name; Members = members }, rest'
     | Keyword "public" :: Keyword "static" :: Keyword "int" :: Identifier name :: OpenParen :: rest ->
         let parameters, rest' = parseParameters rest []
         match rest' with
         | OpenBrace :: rest'' ->
             let body, _ = parseStatement rest''
-            { Name = name; Parameters = parameters; Body = [body] }
+            FunctionDecl { Name = name; Parameters = parameters; Body = [body] }, rest''
         | _ -> failwith "Expected opening brace"
     | _ -> failwith "Unexpected token in declaration"
 
