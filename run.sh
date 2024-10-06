@@ -1,2 +1,2 @@
 echo "==="
-dotnet run --project test-fsharp.fsproj
+dotnet run --project test-fsharp.fsproj "$@"
