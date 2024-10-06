@@ -55,6 +55,17 @@ let ``Test parse if statement`` () =
     Assert.Equal(expectedStatement, parsedStatement)
 
 [<Fact>]
+let ``Test parse binary operation expression`` () =
+    let tokens = [
+        Identifier "val"
+        Operator "<"
+        Token.Number 50
+    ]
+    let expectedExpression = BinaryOperation (Variable "val", "<", Number 50)
+    let parsedExpression, _ = parseExpression tokens
+    Assert.Equal(expectedExpression, parsedExpression)
+
+[<Fact>]
 let ``Test parse return statement`` () =
     let tokens = [
         Keyword "return"
