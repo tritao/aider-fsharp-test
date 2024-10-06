@@ -65,8 +65,8 @@ let rec parseParameters tokens acc =
 let rec parseMembers tokens acc =
     match tokens with
     | Keyword t :: Identifier n :: Semicolon :: rest ->
-        let member = (t, n)
-        parseMembers rest (member :: acc)
+        let classMember = (t, n)
+        parseMembers rest (classMember :: acc)
     | CloseBrace :: rest -> List.rev acc, rest
     | _ -> failwith "Unexpected token in class members"
 
