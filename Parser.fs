@@ -83,12 +83,13 @@ let parse (tokens: Token list) =
             { Name = name; Parameters = parameters; Body = [body] }
         | _ -> failwith "Expected opening brace"
     | _ -> failwith "Unexpected token in declaration"
-    match tokens with
-    | Keyword "public" :: Keyword "static" :: Keyword "int" :: Identifier name :: OpenParen :: rest ->
-        let parameters, rest' = parseParameters rest []
-        match rest' with
-        | OpenBrace :: rest'' ->
-            let body, _ = parseStatement rest''
-            { Name = name; Parameters = parameters; Body = [body] }
-        | _ -> failwith "Expected opening brace"
-    | _ -> failwith "Unexpected token in function declaration"
+
+    // match tokens with
+    // | Keyword "public" :: Keyword "static" :: Keyword "int" :: Identifier name :: OpenParen :: rest ->
+    //     let parameters, rest' = parseParameters rest []
+    //     match rest' with
+    //     | OpenBrace :: rest'' ->
+    //         let body, _ = parseStatement rest''
+    //         { Name = name; Parameters = parameters; Body = [body] }
+    //     | _ -> failwith "Expected opening brace"
+    // | _ -> failwith "Unexpected token in function declaration"
